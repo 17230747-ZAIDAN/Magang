@@ -12,11 +12,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            NewsSeeder::class,
+            MemberSeeder::class,
+            DocumentSeeder::class,
+            AgendaSeeder::class,
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->command->info('✓ Database seeded successfully!');
+        $this->command->info('');
+        $this->command->info('Sample data created:');
+        $this->command->info('- News: ' . \App\Models\News::count() . ' items');
+        $this->command->info('- Members: ' . \App\Models\Member::count() . ' items');
+        $this->command->info('- Documents: ' . \App\Models\Document::count() . ' items');
+        $this->command->info('- Agendas: ' . \App\Models\Agenda::count() . ' items');
     }
 }
