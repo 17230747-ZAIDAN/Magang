@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="@yield('meta_description', 'Portal resmi DPR RI - Informasi berita, anggota dewan, dokumen legislasi, dan aspirasi masyarakat')">
-    <meta name="keywords" content="@yield('meta_keywords', 'DPR RI, parlemen, legislasi, anggota dewan, berita dpr')">
+    <meta name="description" content="@yield('meta_description', 'Portal resmi DPRD Tangerang Selatan - Informasi berita, anggota dewan, dokumen legislasi, dan aspirasi masyarakat')">
+    <meta name="keywords" content="@yield('meta_keywords', 'DPRD Tangerang Selatan, parlemen, legislasi, anggota dewan, berita dpr')">
     <title>@yield('title', 'Portal Parlemen') - DPRD Tangerang Selatan</title>
     
     <!-- Favicon -->
@@ -119,7 +119,7 @@
             <div class="footer-content">
                 <!-- About Section -->
                 <div class="footer-section">
-                    <h3>Dewan Perwakilan Rakyat RI</h3>
+                    <h3>Dewan Perwakilan Rakyat Daerah Tangerang Selatan</h3>
                     <p>Lembaga negara yang memegang kekuasaan membentuk undang-undang, fungsi anggaran, dan fungsi pengawasan.</p>
                     <div class="social-links">
                         <a href="https://www.facebook.com/share/1J4U6PB2gA/" class="social-link" aria-label="Facebook">
@@ -153,7 +153,7 @@
                     <h3>Tautan Cepat</h3>
                     <ul>
                         <li><a href="{{ route('berita.index') }}">Berita Terkini</a></li>
-                        <li><a href="{{ route('anggota.index') }}">Anggota DPR RI</a></li>
+                        <li><a href="{{ route('anggota.index') }}">Anggota DPRD Tangerang Selatan</a></li>
                         <li><a href="{{ route('dokumen.jdih') }}">JDIH</a></li>
                         <li><a href="{{ route('aspirasi.create') }}">Aspirasi Masyarakat</a></li>
                         <li><a href="{{ route('kontak') }}">Hubungi Kami</a></li>
@@ -163,7 +163,7 @@
                 <!-- Apps Section -->
                 <div class="footer-section">
                     <h3>Aplikasi Mobile</h3>
-                    <p>Unduh aplikasi DPR RI untuk akses lebih mudah</p>
+                    <p>Unduh aplikasi DPRD Tangerang Selatan untuk akses lebih mudah</p>
                     <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem;">
                         <a href="#" style="display: inline-block;">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" style="height: 40px;">

@@ -9,7 +9,7 @@
 <section class="bg-soft pt-6 pb-8">
     <div class="container">
         <div class="text-center mb-6">
-            <h2>Layanan Informasi DPR RI</h2>
+            <h2>Layanan Informasi DPRD Tangerang Selatan</h2>
             <p class="text-muted">Akses cepat ke informasi dan layanan utama</p>
         </div>
         
@@ -21,7 +21,7 @@
                         <i class="fas fa-newspaper"></i>
                     </div>
                     <h3 class="card-title">Berita Terkini</h3>
-                    <p class="card-text">Informasi dan berita terbaru seputar kegiatan DPR RI</p>
+                    <p class="card-text">Informasi dan berita terbaru seputar kegiatan DPRD Tangerang Selatan</p>
                 </div>
             </a>
             
@@ -32,7 +32,7 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <h3 class="card-title">Temukan Wakil Anda</h3>
-                    <p class="card-text">Cari dan hubungi anggota DPR RI dari daerah Anda</p>
+                    <p class="card-text">Cari dan hubungi anggota DPRD Tangerang Selatan dari daerah Anda</p>
                 </div>
             </a>
             
@@ -43,7 +43,7 @@
                         <i class="fas fa-comments"></i>
                     </div>
                     <h3 class="card-title">Aspirasi Masyarakat</h3>
-                    <p class="card-text">Sampaikan pendapat dan aspirasi Anda kepada DPR RI</p>
+                    <p class="card-text">Sampaikan pendapat dan aspirasi Anda kepada DPRD Tangerang Selatan</p>
                 </div>
             </a>
             
@@ -89,7 +89,7 @@
         <div class="text-center mb-4">
             <span class="badge badge-live">● LIVE</span>
             <h2 class="mt-2">TV Parlemen</h2>
-            <p class="text-muted">Saksikan siaran langsung kegiatan DPR RI</p>
+            <p class="text-muted">Saksikan siaran langsung kegiatan DPRD Tangerang Selatan</p>
         </div>
         
         <div style="max-width: 900px; margin: 0 auto;">
@@ -108,8 +108,8 @@
 <section class="bg-soft pt-8 pb-8">
     <div class="container">
         <div class="text-center mb-6">
-            <h2>Tugas dan Fungsi DPR RI</h2>
-            <p class="text-muted">Peran DPR RI dalam sistem ketatanegaraan Indonesia</p>
+            <h2>Tugas dan Fungsi DPRD Tangerang Selatan</h2>
+            <p class="text-muted">Peran DPRD Tangerang Selatan dalam sistem ketatanegaraan Indonesia</p>
         </div>
         
         <div class="grid grid-cols-4">
@@ -186,7 +186,7 @@
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
             <div>
                 <h2>Berita Terkini</h2>
-                <p class="text-muted">Informasi terbaru seputar kegiatan DPR RI</p>
+                <p class="text-muted">Informasi terbaru seputar kegiatan DPRD Tangerang Selatan</p>
             </div>
             <a href="{{ route('berita.index') }}" class="btn btn-primary">Lihat Semua Berita</a>
         </div>
