@@ -7,6 +7,16 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\AspirationController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\MemberController as AdminMemberController;
+use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
+use App\Http\Controllers\Admin\DocumentController as AdminDocumentController;
+use App\Http\Controllers\Admin\AgendaController as AdminAgendaController;
+use App\Http\Controllers\Admin\AspirationController as AdminAspirationController;
+use App\Http\Controllers\Admin\InternController as AdminInternController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -134,3 +144,48 @@ Route::prefix('lainnya')->name('lainnya.')->group(function () {
 Route::get('/kontak', function () {
     return view('v_kontak.index');
 })->name('kontak');
+
+// ========== BACKEND ADMIN ROUTES ==========
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Auth
+    Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AdminAuthController::class, 'login'])->name('login.submit');
+    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+
+    // Protected Admin Panel
+    Route::middleware('auth')->group(function () {
+        Route::get('/', fn() => redirect()->route('admin.dashboard'));
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+
+        // Ganti Password Akun Sendiri
+        Route::get('/ganti-password', [AdminProfileController::class, 'editPassword'])->name('password');
+        Route::put('/ganti-password', [AdminProfileController::class, 'updatePassword'])->name('password.update');
+
+        // CRUD Berita
+        Route::resource('berita', AdminNewsController::class)->parameters(['berita' => 'berita'])->except(['show']);
+
+        // CRUD Anggota Dewan
+        Route::resource('anggota', AdminMemberController::class)->parameters(['anggota' => 'anggota'])->except(['show']);
+
+        // CRUD Galeri
+        Route::resource('galeri', AdminGalleryController::class)->parameters(['galeri' => 'galeri'])->except(['show']);
+
+        // CRUD Dokumen & JDIH
+        Route::resource('dokumen', AdminDocumentController::class)->parameters(['dokumen' => 'dokumen'])->except(['show']);
+
+        // CRUD Agenda
+        Route::resource('agenda', AdminAgendaController::class)->parameters(['agenda' => 'agenda'])->except(['show']);
+
+        // Manajemen Aspirasi Warga
+        Route::get('/aspirasi', [AdminAspirationController::class, 'index'])->name('aspirasi.index');
+        Route::get('/aspirasi/{aspirasi}', [AdminAspirationController::class, 'show'])->name('aspirasi.show');
+        Route::put('/aspirasi/{aspirasi}', [AdminAspirationController::class, 'update'])->name('aspirasi.update');
+        Route::delete('/aspirasi/{aspirasi}', [AdminAspirationController::class, 'destroy'])->name('aspirasi.destroy');
+
+        // CRUD Akun Magang (Khusus Administrator Utama)
+        Route::middleware('admin.only')->group(function () {
+            Route::resource('magang', AdminInternController::class)->parameters(['magang' => 'magang'])->except(['show']);
+            Route::patch('magang/{magang}/toggle', [AdminInternController::class, 'toggleStatus'])->name('magang.toggle');
+        });
+    });
+});

@@ -21,6 +21,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'institution',
+        'internship_period',
+        'phone',
+        'is_active',
     ];
 
     /**
@@ -41,5 +46,30 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'is_active' => 'boolean',
     ];
+
+    /**
+     * Check if user is main administrator
+     */
+    public function isAdmin(): bool
+    {
+        return ($this->role ?? 'admin') === 'admin';
+    }
+
+    /**
+     * Check if user is intern
+     */
+    public function isMagang(): bool
+    {
+        return $this->role === 'magang';
+    }
+
+    /**
+     * Get display role name
+     */
+    public function getRoleNameAttribute(): string
+    {
+        return $this->isAdmin() ? 'Administrator' : 'Peserta Magang';
+    }
 }

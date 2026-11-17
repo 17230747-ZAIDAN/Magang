@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="@yield('meta_description', 'Portal resmi DPR RI - Informasi berita, anggota dewan, dokumen legislasi, dan aspirasi masyarakat')">
     <meta name="keywords" content="@yield('meta_keywords', 'DPR RI, parlemen, legislasi, anggota dewan, berita dpr')">
-    <title>@yield('title', 'Portal Parlemen') - DPR RI</title>
+    <title>@yield('title', 'Portal Parlemen') - DPRD Tangerang Selatan</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('images/Logo.png') }}">
@@ -18,7 +18,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Main Stylesheet -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @endif
     
     @stack('styles')
 </head>
@@ -28,18 +32,18 @@
         <!-- Header Top -->
         <div class="header-top">
             <div class="container">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="display: flex; gap: 1.5rem;">
-                        <a href="{{ route('media.tv') }}">
-                            <i class="fas fa-tv"></i> TV Parlemen
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; font-size: 0.825rem;">
+                        <span><i class="fas fa-map-marker-alt" style="color: var(--accent);"></i> Kota Tangerang Selatan</span>
+                        <a href="{{ route('kontak') }}" style="display: inline-flex; align-items: center; gap: 0.35rem;">
+                            <i class="fas fa-phone-alt" style="color: var(--accent);"></i> (021) 7562233
                         </a>
-                        <a href="{{ route('kontak') }}">
-                            <i class="fas fa-phone"></i> Kontak
+                        <a href="{{ route('media.tv') }}" style="display: inline-flex; align-items: center; gap: 0.35rem;">
+                            <i class="fas fa-tv" style="color: var(--accent);"></i> TV Parlemen
                         </a>
                     </div>
-                    <div>
-                        <a href="#" onclick="alert('Bahasa Indonesia aktif')">ID</a> | 
-                        <a href="#" onclick="alert('English version coming soon')">EN</a>
+                    <div style="display: flex; align-items: center; gap: 1rem; font-size: 0.8rem;">
+                        <span style="opacity: 0.9;"><i class="far fa-calendar-alt"></i> {{ now()->translatedFormat('l, d F Y') }}</span>
                     </div>
                 </div>
             </div>
@@ -51,16 +55,16 @@
                 <div class="header-content">
                     <!-- Logo -->
                     <a href="{{ route('beranda') }}" class="logo">
-                        <img src="{{ asset('images/Logo.png') }}" alt="Logo DPR RI">
+                        <img src="{{ asset('images/Logo.png') }}" alt="Logo DPRD Kota Tangerang Selatan">
                         <div class="logo-text">
-                            <h1>Dewan Perwakilan Rakyat</h1>
-                            <p>Republik Indonesia</p>
+                            <h1>DPRD KOTA TANGERANG SELATAN</h1>
+                            <p>Dewan Perwakilan Rakyat Daerah Kota Tangerang Selatan</p>
                         </div>
                     </a>
                     
                     <!-- Navigation -->
                     <nav class="nav-main">
-                        <button class="menu-toggle" id="menuToggle">
+                        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
                             <i class="fas fa-bars"></i>
                         </button>
                         
@@ -69,29 +73,32 @@
                                 <a href="{{ route('beranda') }}" class="nav-link {{ request()->routeIs('beranda') ? 'active' : '' }}">Beranda</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Tentang DPR RI</a>
+                                <a href="{{ route('tentang.profil') }}" class="nav-link {{ request()->routeIs('tentang.*') ? 'active' : '' }}">Tentang</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Kegiatan DPR RI</a>
+                                <a href="{{ route('kegiatan.agenda') }}" class="nav-link {{ request()->routeIs('kegiatan.*') ? 'active' : '' }}">Kegiatan</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('anggota.index') }}" class="nav-link {{ request()->routeIs('anggota.*') ? 'active' : '' }}">Anggota</a>
+                                <a href="{{ route('anggota.index') }}" class="nav-link {{ request()->routeIs('anggota.*') ? 'active' : '' }}">Anggota Dewan</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('berita.index') }}" class="nav-link {{ request()->routeIs('berita.*') ? 'active' : '' }}">Berita</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('dokumen.index') }}" class="nav-link {{ request()->routeIs('dokumen.*') ? 'active' : '' }}">Dokumen</a>
+                                <a href="{{ route('dokumen.index') }}" class="nav-link {{ request()->routeIs('dokumen.*') ? 'active' : '' }}">Dokumen & JDIH</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Lainnya</a>
+                                <a href="{{ route('aspirasi.create') }}" class="nav-link {{ request()->routeIs('aspirasi.*') ? 'active' : '' }}">Aspirasi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('kontak') }}" class="nav-link {{ request()->routeIs('kontak') ? 'active' : '' }}">Kontak</a>
                             </li>
                         </ul>
                         
                         <!-- Search Box -->
                         <form action="{{ route('search') }}" method="GET" class="search-box">
-                            <input type="text" name="q" class="search-input" placeholder="Cari..." value="{{ request('q') }}">
-                            <button type="submit" class="search-btn">
+                            <input type="text" name="q" class="search-input" placeholder="Cari informasi..." value="{{ request('q') }}">
+                            <button type="submit" class="search-btn" aria-label="Cari">
                                 <i class="fas fa-search"></i>
                             </button>
                         </form>
@@ -115,16 +122,16 @@
                     <h3>Dewan Perwakilan Rakyat RI</h3>
                     <p>Lembaga negara yang memegang kekuasaan membentuk undang-undang, fungsi anggaran, dan fungsi pengawasan.</p>
                     <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Facebook">
+                        <a href="https://www.facebook.com/share/1J4U6PB2gA/" class="social-link" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" class="social-link" aria-label="Twitter">
+                        <a href="https://x.com/dprdtangselkota" class="social-link" aria-label="Twitter">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="#" class="social-link" aria-label="Instagram">
+                        <a href="https://instagram.com/dprdtangselkota" class="social-link" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="social-link" aria-label="YouTube">
+                        <a href="https://youtube.com/@dprdtangerangselatan" class="social-link" aria-label="YouTube">
                             <i class="fab fa-youtube"></i>
                         </a>
                     </div>
@@ -134,8 +141,8 @@
                 <div class="footer-section">
                     <h3>Kontak</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Jl. Gatot Subroto, Jakarta Pusat 10270</li>
-                        <li><i class="fas fa-phone"></i> (021) 5715.409</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Jl. Raya Serpong No.1, Setu, Kec. Setu, Kota Tangerang Selatan, Banten 15314</li>
+                        <li><i class="fas fa-phone"></i> (021) 7562233</li>
                         <li><i class="fas fa-fax"></i> (021) 5715.245</li>
                         <li><i class="fas fa-envelope"></i> humas@dpr.go.id</li>
                     </ul>
@@ -170,7 +177,7 @@
             
             <!-- Footer Bottom -->
             <div class="footer-bottom">
-                <p>&copy; 2026 Dewan Perwakilan Rakyat Republik Indonesia. Hak Cipta Dilindungi.</p>
+                <p>&copy; 2026 Dewan Perwakilan Rakyat Daerah Kota Tangerang Selatan. Hak Cipta Dilindungi.</p>
             </div>
         </div>
     </footer>
